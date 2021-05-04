@@ -16,7 +16,9 @@ const std::string filename = "Cyberpunk2077.exe";
 
 const long offsets[] =
 {
-    53236145    // Patch 1.2 Steam & GOG
+    53236145,    // Patch 1.2 Steam & GOG
+    53249249,    // Patch 1.21 Steam & GOG
+    53252017     // Patch 1.22 Steam & GOG
 };
 
 const long sequence_size = 16;
@@ -70,7 +72,7 @@ int main()
     {
         std::cout << config::filename + " found" << std::endl;
 
-        for (int i = 0; i < sizeof(config::offsets); i++) {
+        for (int i = 0; i < (sizeof(config::offsets)/sizeof(*config::offsets)); i++) {
             long offset = config::offsets[i];
             std::cout << "Checking offset " << offset << ": ";
             if (create_patch_if_matched(cp77exe, offset)) {
